@@ -49,10 +49,34 @@ defmodule LeftistHeapTest do
 
     check all list <- nonempty(list_of(string(:alphanumeric))),
               min = Enum.min(list),
-              max_runs: 100 do
+              max_runs: 200 do
 
       heap = Heap.new(list, leq)
       assert min == Heap.min(heap)
+    end
+  end
+
+  property "Enum.to_list() equals input list" do
+    leq = fn(x, y) -> x <= y end
+
+    check all list <- nonempty(list_of(string(:alphanumeric))),
+      sorted = Enum.sort(list),
+      max_runs: 200 do
+
+      heap = Heap.new(sorted, leq)
+      assert Enum.to_list(heap) == sorted
+    end
+  end
+
+  property "Enum.count() equals input list count" do
+    leq = fn(x, y) -> x <= y end
+
+    check all list <- nonempty(list_of(string(:alphanumeric))),
+      count = Enum.count(list),
+      max_runs: 200 do
+
+      heap = Heap.new(list, leq)
+      assert Enum.count(heap) == count
     end
   end
 end
