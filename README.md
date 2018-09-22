@@ -10,7 +10,7 @@ by adding `ox` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:ox, "~> 0.1.0"}
+    {:ox, "~> 0.2.0"}
   ]
 end
 ```
